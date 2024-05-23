@@ -125,6 +125,11 @@ font-family: Arial, Helvetica, sans-serif;
         inset 1px 1px 1px #909090;
 }
 
+.range-slider .slider -webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 1.7em;
+    
+}
 /* Cuerpo */
 .body { 
     background-color: #014765;
