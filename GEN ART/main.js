@@ -21,6 +21,8 @@ const dropArea = document.querySelector(".drop-area");
 const dragText = dropArea.querySelector("h2");
 const button = dropArea.querySelector("button");
 const input = dropArea.querySelector("#input-file");
+const preview = document.querySelector("#preview");
+const imageContainer = document.querySelector("#image-container");
 let file;
 
 
@@ -114,23 +116,33 @@ function processFile(file) {
                     <div class="status">
                         <span>${file.name}</span>
                         <span class="status-text">
-                            Loading ...
+                            Archivo subido
                         </span>
                     </div>
                 </div>
             `;
-
-            document.querySelector("#preview").innerHTML = image;
+            preview.innerHTML = image;
+        });
+    
+        fileReader.addEventListener('load', (e) => {
+            const fileUrl = fileReader.result;
+            const image = `
+                <img src="${fileUrl}" alt="${file.name}">
+            `;
+            imageContainer.innerHTML = image;
+            imageContainer.style.visibility = 'visible';
         });
 
         fileReader.readAsDataURL(file);
-        uploadFile(file, id);
+
+        //uploadFile(file, id);
     } else {
         alert('El archivo seleccionado no es uno válido.');
     }
 }
 
-
+// No utilizar de momento, no creo que sea necesario subir las imagenes a un
+// servidor.
 /**
  * Sube el archivo al servidor usando una solicitud fetch asíncrona.
  * @param {File} file - Archivo a subir
@@ -160,3 +172,4 @@ async function uploadFile(file, id) {
 
     console.log(file);
 }
+ 
